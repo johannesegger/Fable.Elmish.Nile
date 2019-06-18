@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <PackageId>Fable.Elmish.Nile</PackageId>
+    <PackageVersion>0.0.1</PackageVersion>
+    <Description>Extension to Fable.Elmish that enables transforming the stream of dispatched messages from the view to messages that are dispatched to the update function. It's an alternative approach to Fable.Elmish.Streams. However Fable.Elmish.Streams has some nice helpers that you might want to use with Fable.Elmish.Nile.</Description>
+    <Authors>JEgger</Authors>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="*.fsproj; *.fs" PackagePath="fable\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Fable.Browser.Dom" Version="1.0.0" />
+    <PackageReference Include="Fable.Elmish" Version="3.0.3" />
+    <PackageReference Include="FSharp.Control.AsyncRx" Version="1.0.0" />
+    <PackageReference Update="FSharp.Core" Version="4.6.2" />
+  </ItemGroup>
+
+</Project>
