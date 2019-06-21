@@ -2,4 +2,4 @@ Param(
   [Parameter(Mandatory=$True)][string]$version
 )
 
-dotnet nuget pack /p:PackageVersion=$version
+dotnet pack /p:PackageVersion=$version
