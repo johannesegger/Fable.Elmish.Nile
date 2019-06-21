@@ -6,7 +6,7 @@ open FSharp.Control
 [<RequireQualifiedAccess>]
 module Program =
     /// Uses `stream` to transform a stream of messages dispatched from the view
-    /// and a stream of models created by `update` to a stream of messages dispatched to `update`.
+    /// and a stream of updates to a stream of messages dispatched to `update`.
     /// `stream` is only called once.
     let withStream (stream: IAsyncObservable<_> -> IAsyncObservable<_> -> IAsyncObservable<_>) (program: Elmish.Program<_,_,_,_>) =
         let (modelObserver, modelObservable) = AsyncRx.subject ()
@@ -31,12 +31,12 @@ module Program =
         let mutable initState = None
         let init' fn arg =
             let (model, cmd) = fn arg
-            initState <- Some model
+            initState <- Some (None, model)
             (model, cmd)
 
         let update' fn msg model =
             let (model, cmd) = fn msg model
-            modelObserver.OnNextAsync model |> Async.StartImmediate
+            modelObserver.OnNextAsync (Some msg, model) |> Async.StartImmediate
             (model, cmd)
 
         let mutable hasSubscription = 0

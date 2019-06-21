@@ -44,7 +44,7 @@ let stream states msgs =
 
         // Forward model and message stream to sub component and map the resulting messages back to top-level messages
         (
-            states |> AsyncRx.map (fun m -> m.SubComponent1Model),
+            states |> AsyncRx.map (snd >> fun m -> m.SubComponent1Model),
             msgs |> AsyncRx.choose (function SubComponent1Msg msg -> Some msg | _ -> None)
         )
         ||> SubComponent1.stream
@@ -52,7 +52,7 @@ let stream states msgs =
 
         // The pattern for sub components is always the same
         (
-            states |> AsyncRx.map (fun m -> m.SubComponent2Model),
+            states |> AsyncRx.map (snd >> fun m -> m.SubComponent2Model),
             msgs |> AsyncRx.choose (function SubComponent2Msg msg -> Some msg | _ -> None)
         )
         ||> SubComponent2.stream
