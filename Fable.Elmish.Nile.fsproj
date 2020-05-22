@@ -21,7 +21,8 @@
   <ItemGroup>
     <PackageReference Include="Fable.Browser.Dom" Version="1.1.0" />
     <PackageReference Include="Fable.Elmish" Version="3.0.6" />
-    <PackageReference Include="FSharp.Control.AsyncRx" Version="1.2.1" />
+    <PackageReference Include="Fable.Reaction" Version="3.3.3" />
+    <PackageReference Update="FSharp.Core" Version="4.7.1" />
   </ItemGroup>
 
 </Project>
