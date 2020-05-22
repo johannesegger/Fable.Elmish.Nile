@@ -2,6 +2,7 @@
 
 open Elmish
 open FSharp.Control
+open FSharp.Control.Core
 
 [<RequireQualifiedAccess>]
 module Program =
@@ -55,11 +56,7 @@ module Program =
                     let! sub = messages.SubscribeAsync msgObserver
                     subscription <- sub
                 }
-#if FABLE_COMPILER
-                |> Async.StartImmediate
-#else
-                |> Async.Start
-#endif
+                |> Async.Start'
                 initState |> Option.iter (modelObserver.OnNextAsync >> Async.StartImmediate)
                 initState <- None
             fn model (messageObserver.OnNextAsync >> Async.StartImmediate)
