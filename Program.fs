@@ -16,6 +16,19 @@ module Program =
 
         let mutable dispatch = ignore
 
+        let msgObserver =
+            { new IAsyncObserver<'msg> with
+                member __.OnNextAsync x = async {
+                    dispatch x
+                }
+                member __.OnErrorAsync err = async {
+                    Browser.Dom.console.error ("[Fable.Elmish.Nile] Stream error", err)
+                }
+                member __.OnCompletedAsync () = async {
+                    Browser.Dom.console.log ("[Fable.Elmish.Nile] Stream completed.")
+                }
+            }
+
         let mutable initState = None
         let init' fn arg =
             let (model, cmd) = fn arg
@@ -29,21 +42,6 @@ module Program =
 
         let mutable hasSubscription = 0
         let mutable subscription = AsyncDisposable.Empty
-
-        let msgObserver =
-            { new IAsyncObserver<'msg> with
-                member __.OnNextAsync x = async {
-                    dispatch x
-                }
-                member __.OnErrorAsync err = async {
-                    Browser.Dom.console.error ("[Fable.Elmish.Nile] Stream error", err)
-                    do! subscription.DisposeAsync()
-                }
-                member __.OnCompletedAsync () = async {
-                    Browser.Dom.console.log ("[Fable.Elmish.Nile] Stream completed.")
-                    do! subscription.DisposeAsync()
-                }
-            }
         let view' fn model dispatch' =
             dispatch <- dispatch'
 
