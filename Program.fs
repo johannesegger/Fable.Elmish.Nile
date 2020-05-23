@@ -50,7 +50,7 @@ module Program =
             if hasSubscription = 0 then
                 hasSubscription <- 1
 #else
-            if System.Threading.Interlocked.CompareExchange(&hasSubscription, 1, 0) = 0 then
+            if System.Threading.Interlocked.Exchange(&hasSubscription, 1) = 0 then
 #endif
                 async {
                     let! sub = messages.SubscribeAsync msgObserver
