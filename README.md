@@ -1,6 +1,6 @@
 # Fable.Elmish.Nile
 
-![Nuget](https://img.shields.io/nuget/v/Fable.Elmish.Nile.svg)
+[![Nuget](https://img.shields.io/nuget/v/Fable.Elmish.Nile.svg)](https://www.nuget.org/packages/Fable.Elmish.Nile/)
 
 Extension to [Fable.Elmish](https://elmish.github.io/elmish/) that enables transforming the stream of dispatched messages from the view to messages that are dispatched to the update function.
 
